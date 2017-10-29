@@ -95,7 +95,6 @@ describe("About Applying What We Have Learnt", function() {
                             }, {})
                             .value()
 
-    console.log(ingredientCount)
 
     /* chain() together map(), flatten() and reduce() */
 
@@ -103,30 +102,109 @@ describe("About Applying What We Have Learnt", function() {
 
 
     expect(ingredientCount['mushrooms']).toBe(2);
-  });
+  })
 
-  /*********************************************************************************/
-  /* UNCOMMENT FOR EXTRA CREDIT */
-  /*
+
   it("should find the largest prime factor of a composite number", function () {
-  
+    var largestPrime = function(num){
+      for(var i = num - 1; i > 0; i--){
+        if(isPrime(i) && num % i == 0){
+          return i;
+        }
+      }
+      return 1;
+    }
+
+    var isPrime = function(num){
+      if(num === 1) return true;
+      if(num % 2 === 0 || num % 3 === 0)return false;
+      return true;
+    }
+    expect(largestPrime(21)).toBe(7);
+
+
   });
 
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
-    
+    var largestPalindrome = function(){
+      var i = 999;
+      var prods = [];
+      while(i > 100){
+        var j = 999;
+        while(j > i){
+          var prod = i * j;
+          if(isPalindrome(prod)){
+            prods.push(prod)
+          };
+          j = j - 1;
+        };
+        i = i - 1
+      }
+      return _.max(prods)
+    }
+    function isPalindrome(num){
+      var reverse = num.toString().split('').reverse().join('');
+      return num.toString() === reverse
+    }
+
+    expect(isPalindrome(12321)).toBe(true)
+    expect(isPalindrome(906609)).toBe(true)
+    expect(largestPalindrome()).toBe(906609)
+
   });
 
   it("should find the smallest number divisible by each of the numbers 1 to 20", function () {
-      
-    
+      function smDivisible(){
+        num = 20
+        while(true){
+          var isDivisible = true;
+          for(var i = 1; i <= 20; i++){
+            if(num % i !== 0){
+              isDivisible = false;
+            };
+          }
+          if(isDivisible){
+            return num;
+          }
+          num += 20
+        }
+      }
+      expect(smDivisible()).toBe(232792560)
   });
 
   it("should find the difference between the sum of the squares and the square of the sums", function () {
-    
+
   });
 
   it("should find the 10001st prime", function () {
+    function findPrime(){
+      var count = 0
+      var num = 2
+      while(count < 10001){
+        if(isPrime(num)){
+          if(count === 10000){
+            return num
+          }
+          count += 1;
+          num += 1;
+          continue;
+        }
+        num += 1;
+      }
+    }
 
+  function isPrime(num) {
+    for(var i = 2; i < num; i++)
+      if(num % i === 0) return false;
+    return num !== 1;
+  }
+
+  expect(findPrime()).toBe(104743)
   });
-  */
 });
+
+
+
+
+
+
